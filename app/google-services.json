@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "172412386573",
+    "project_id": "alphatrain-a47cc",
+    "storage_bucket": "alphatrain-a47cc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172412386573:android:8b27d7325af49d26454444",
+        "android_client_info": {
+          "package_name": "com.alphatrain.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWgIkUsgRYZEqSitogpdsvrlNupqFSGIU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
