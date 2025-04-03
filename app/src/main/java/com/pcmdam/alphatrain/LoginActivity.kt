@@ -32,12 +32,10 @@ class LoginActivity : AppCompatActivity() {
                             user?.let {
                                 val userId = it.uid
 
-                                // Verificar si el usuario ya tiene un plan de entrenamiento
                                 db.collection("PlanesEntrenamiento").document(userId)
                                     .get()
                                     .addOnSuccessListener { documentSnapshot ->
                                         if (documentSnapshot.exists()) {
-                                            // Si el plan existe, verificar si tiene un objetivo
                                             db.collection("users").document(userId)
                                                 .get()
                                                 .addOnSuccessListener { userDocument ->

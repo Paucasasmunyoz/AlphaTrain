@@ -34,7 +34,7 @@ class MainPageActivity : AppCompatActivity() {
             popupMenu.menu.add("Dieta")
             popupMenu.setOnMenuItemClickListener { item ->
                 if (item.title == "Dieta") {
-                    val intent = Intent(this@MainPageActivity, DietActivity::class.java)
+                    val intent = Intent(this@MainPageActivity, UserInfoActivity::class.java)
                     startActivity(intent)
                     true
                 } else {

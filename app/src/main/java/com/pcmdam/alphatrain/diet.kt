@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.math.roundToInt
 
 class DietActivity : AppCompatActivity() {
 
@@ -18,17 +19,37 @@ class DietActivity : AppCompatActivity() {
         val waterTextView: TextView = findViewById(R.id.waterTextView)
         val backButton: ImageView = findViewById(R.id.backButton)
 
-        caloriesTextView.text = "1800 kcal"
-        proteinTextView.text = "140 g"
-        carbsTextView.text = "300 g"
-        waterTextView.text = "3 litros"
+        val weight = intent.getDoubleExtra("weight", 0.0)
+        val age = intent.getIntExtra("age", 0)
+        val height = intent.getIntExtra("height", 0)
+        val objective = intent.getStringExtra("objective") ?: "Mantener peso"
+
+
+        var bmr = (10 * weight + 6.25 * height - 5 * age + 5).roundToInt()
+        var activityFactor = 1.55
+        var calories = (bmr * activityFactor).roundToInt()
+
+        var proteinGrams = (weight * 1.6).roundToInt()
+        var waterLitros = (weight * 0.035).roundToInt()
+
+        if (objective == "Perder peso") {
+            calories -= 500
+            proteinGrams = (weight * 1.8).roundToInt()
+        } else if (objective == "Aumentar masa muscular") {
+            calories += 300
+            proteinGrams = (weight * 2.0).roundToInt()
+        }
+
+        val carbsGrams = (calories * 0.5 / 4).roundToInt()
+
+        caloriesTextView.text = "$calories kcal"
+        proteinTextView.text = "$proteinGrams g"
+        carbsTextView.text = "$carbsGrams g"
+        waterTextView.text = "$waterLitros litros"
 
         backButton.setOnClickListener {
-            // Crea un Intent para volver a la MainPageActivity
             val intent = Intent(this, MainPageActivity::class.java)
-            // Inicia la actividad
             startActivity(intent)
-            // Opcional: Cierra la actividad actual para que no quede en la pila
             finish()
         }
     }
