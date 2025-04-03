@@ -1,5 +1,6 @@
 package com.pcmdam.alphatrain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.Toast;
@@ -59,14 +60,17 @@ class TrainingDaysActivity : AppCompatActivity() {
                         val userRef = db.collection("users").document(userId);
                         userRef.update("plan_entrenamiento", "/PlanesEntrenamiento/$userId")
                             .addOnSuccessListener {
-                                Toast.makeText(this, "Plan de entrenamiento guardado correctamente", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Días guardados. ¡A por tu objetivo!", Toast.LENGTH_SHORT).show();
+                                var intent: Intent? = Intent(this, ObjectiveActivity::class.java)
+                                startActivity(intent);
+                                finish();
                             }
                             .addOnFailureListener { e ->
                                 Toast.makeText(this, "Error al actualizar el plan: ${e.message}", Toast.LENGTH_SHORT).show();
                             };
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(this, "Error al guardar el plan de entrenamiento: ${e.message}", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error al guardar los días: ${e.message}", Toast.LENGTH_SHORT).show();
                     };
             } else {
                 Toast.makeText(this, "Error: no se pudo obtener el usuario", Toast.LENGTH_SHORT).show();

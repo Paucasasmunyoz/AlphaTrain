@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AlphaTrain</string>
+    <string-array name="objectives_array">
+        <item>Selecciona tu objetivo</item>
+        <item>Tonificar</item>
+        <item>Aumento de masa muscular</item>
+        <item>Definición</item>
+    </string-array>
 </resources>

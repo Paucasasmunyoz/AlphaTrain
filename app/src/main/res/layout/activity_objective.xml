@@ -4,22 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:background="#D8BFD8">
 
     <TextView
         android:id="@+id/tvObjective"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Objetivo"
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp" />
+        android:text="¿Cuál es tu objetivo?"
+        android:textSize="24sp"
+        android:layout_marginBottom="32dp" />
 
     <Spinner
         android:id="@+id/spinnerObjective"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:spinnerMode="dropdown" />
 
     <Button
@@ -27,6 +27,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Continuar"
-        android:layout_marginTop="16dp"
-        android:onClick="onContinueClicked" />
+        android:layout_marginTop="16dp" />
+
 </LinearLayout>
