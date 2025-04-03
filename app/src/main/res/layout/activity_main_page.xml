@@ -1,102 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#D8BFD8">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AlphaTrain"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="#684485"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="24dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Intensidad"
-        android:textSize="20sp"
-        android:textColor="#684485"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp" />
+    android:background="#1E1E1E">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="16dp">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="#9C66B3" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
 
         <TextView
+            android:id="@+id/alphaTrainTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="....."
-            android:textSize="16sp"
-            android:textColor="#9C66B3"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp" />
+            android:text="AlphaTrain"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="#9C66B3" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_marginBottom="16dp">
+        <ImageView
+            android:id="@+id/intensityImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mp"
+            android:layout_marginBottom="24dp" />
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/tusDiasTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Hipertrofia"
-            android:textSize="16sp"
-            android:textColor="#684485"
-            android:gravity="center" />
+            android:text="Tus Días de Entrenamiento"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/layoutDiasEntrenamiento"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Fuerza"
-            android:textSize="16sp"
-            android:textColor="#684485"
-            android:gravity="center" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dia1TextView"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#37303B"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/dia2TextView"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#37303B"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/dia3TextView"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#37303B"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/dia4TextView"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#37303B"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/dia5TextView"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#37303B"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:paddingStart="16dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tus Días de Entrenamiento"
-        android:textSize="20sp"
-        android:textColor="#684485"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="16dp" />
+    <ImageView
+        android:id="@+id/settingsImageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_settings"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true" />
 
-    <LinearLayout
-        android:id="@+id/layoutDiasEntrenamiento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
