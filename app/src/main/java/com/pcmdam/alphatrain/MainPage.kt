@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.alphatrain.app.WorkoutDayActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,6 +18,7 @@ class MainPageActivity : AppCompatActivity() {
     private var layoutDiasEntrenamiento: LinearLayout? = null
     private var auth: FirebaseAuth? = null
     private var db: FirebaseFirestore? = null
+    private var userObjective: String = "Mantener peso" // Inicializamos con un valor por defecto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +27,10 @@ class MainPageActivity : AppCompatActivity() {
         layoutDiasEntrenamiento = findViewById(R.id.layoutDiasEntrenamiento)
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+
+        // Obtener el objetivo del usuario (ejemplo: desde SharedPreferences)
+        val prefs = getSharedPreferences("user_data", MODE_PRIVATE)
+        userObjective = prefs.getString("objective", "Mantener peso") ?: "Mantener peso"
 
         cargarDiasEntrenamiento()
 
@@ -70,7 +76,14 @@ class MainPageActivity : AppCompatActivity() {
 
                             for (i in dias.indices) {
                                 if (i < diaTextViews.size) {
-                                    diaTextViews[i].text = dias[i].trim()
+                                    val dayOfWeek = dias[i].trim()
+                                    diaTextViews[i].text = dayOfWeek
+                                    diaTextViews[i].setOnClickListener {
+                                        val intent = Intent(this@MainPageActivity, WorkoutDayActivity::class.java)
+                                        intent.putExtra("day", dayOfWeek)
+                                        intent.putExtra("objective", userObjective)
+                                        startActivity(intent)
+                                    }
                                 }
                             }
                             for (i in dias.size until diaTextViews.size) {
