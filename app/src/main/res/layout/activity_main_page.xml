@@ -7,99 +7,45 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/alphaTrainTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AlphaTrain"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:text="AlphaTrain"
+            android:textColor="@android:color/white"
+            android:textSize="32sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/intensityImageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/mp"
-            android:layout_marginBottom="24dp" />
+            android:layout_height="235dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/mp" />
 
         <TextView
             android:id="@+id/tusDiasTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tus Días de Entrenamiento"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:text="Tus Días de Entrenamiento"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
+        <!-- Aquí se agregan dinámicamente los días -->
         <LinearLayout
             android:id="@+id/layoutDiasEntrenamiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/dia1TextView"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="#37303B"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/dia2TextView"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="#37303B"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/dia3TextView"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="#37303B"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/dia4TextView"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="#37303B"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:layout_marginBottom="8dp" />
-
-            <TextView
-                android:id="@+id/dia5TextView"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="#37303B"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp" />
-
-        </LinearLayout>
+            android:orientation="vertical"
+            android:layout_marginTop="16dp" /> <!-- Se aumenta el margen superior para mayor separación entre los días -->
 
     </LinearLayout>
 

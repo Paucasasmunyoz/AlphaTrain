@@ -1,7 +1,9 @@
 package com.alphatrain.app
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.pcmdam.alphatrain.Exercise
 import com.pcmdam.alphatrain.ExerciseAdapter
+import com.pcmdam.alphatrain.MainPageActivity
 import com.pcmdam.alphatrain.R
 import java.text.Normalizer
 
@@ -57,6 +60,13 @@ class WorkoutDayActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.e("WorkoutDayActivity", "Error al obtener el objetivo desde Firestore", exception)
             }
+
+        val backButton: ImageButton = findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            val intent = Intent(this, MainPageActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun normalize(text: String?): String? {
@@ -93,15 +103,23 @@ class WorkoutDayActivity : AppCompatActivity() {
                 Exercise("Curl martillo", 4, "6-12")
                 )
 
-
             "definicion" -> listOf(
-                Exercise("Ejercicio 3", 3, "8-12"),
-                Exercise("Ejercicio 4", 3, "8-12")
-            )
+                Exercise("Remo con barra", 3, "12-15"),
+                Exercise("Face pull", 3, "12-15"),
+                Exercise("Pull-Up", 3, "12-15"),
+                Exercise("Deadlift", 2, "12-15"),
+                Exercise("Curl de biceps con mancuernas", 4, "10-15"),
+                Exercise("Curl martillo", 4, "10-15"),
+                )
+
             "tonificar" -> listOf(
-                Exercise("Ejercicio 5", 2, "12-15"),
-                Exercise("Ejercicio 6", 2, "12-15")
-            )
+                Exercise("Remo con mancuerna a una mano", 3, "8-12"),
+                Exercise("Superman", 3, "8-12"),
+                Exercise("Jalon al pecho", 3, "8-12"),
+                Exercise("Peso muerto rumano", 3, "8-12"),
+                Exercise("Curl de biceps con mancuerna", 4, "6-12"),
+                Exercise("Curl de biceps con barra Z", 4, "6-12"),
+                )
             else -> emptyList()
         }
     }
@@ -110,16 +128,30 @@ class WorkoutDayActivity : AppCompatActivity() {
         Log.d("WorkoutDayActivity", "Obteniendo rutina de Martes para: $objective")
         return when (objective) {
             "aumento de masa muscular" -> listOf(
-                Exercise("Ejercicio 7", 3, "6-10"),
-                Exercise("Ejercicio 8", 3, "6-10")
+                Exercise("Press de banca plano", 4, "4-8"),
+                Exercise("Press de banca inclinado con mancuernas", 3, "4-8"),
+                Exercise("Aperturas en banco plano", 3, "4-8"),
+                Exercise("Fondos en paralelas", 3, "6-10"),
+                Exercise("Press de tríceps en cuerda", 4, "6-12"),
+                Exercise("Extensiones de tríceps con mancuerna a una mano", 4, "6-12")
             )
+
             "definicion" -> listOf(
-                Exercise("Ejercicio 9", 3, "8-12"),
-                Exercise("Ejercicio 10", 3, "8-12")
+                Exercise("Press de banca plano", 3, "12-15"),
+                Exercise("Aperturas con mancuernas en banco inclinado", 3, "12-15"),
+                Exercise("Flexiones de pecho", 3, "12-15"),
+                Exercise("Fondos en paralelas asistidos", 3, "12-15"),
+                Exercise("Extensión de tríceps en cuerda", 4, "10-15"),
+                Exercise("Rompecráneos", 4, "10-15")
             )
+
             "tonificar" -> listOf(
-                Exercise("Ejercicio 11", 2, "12-15"),
-                Exercise("Ejercicio 12", 2, "12-15")
+                Exercise("Flexiones de pecho", 3, "8-12"),
+                Exercise("Press de banca en máquina", 3, "8-12"),
+                Exercise("Aperturas con mancuernas", 3, "8-12"),
+                Exercise("Fondos entre bancos", 3, "8-12"),
+                Exercise("Extensión de tríceps por encima de la cabeza", 4, "6-12"),
+                Exercise("Press de tríceps en máquina", 4, "6-12")
             )
             else -> emptyList()
         }
@@ -129,16 +161,31 @@ class WorkoutDayActivity : AppCompatActivity() {
         Log.d("WorkoutDayActivity", "Obteniendo rutina de Miércoles para: $objective")
         return when (objective) {
             "aumento de masa muscular" -> listOf(
-                Exercise("Ejercicio 13", 3, "6-10"),
-                Exercise("Ejercicio 14", 3, "6-10")
+                Exercise("Sentadillas", 4, "6-10"),
+                Exercise("Prensa de pierna", 4, "6-10"),
+                Exercise("Peso muerto", 3, "6-10"),
+                Exercise("Zancadas con barra", 3, "6-10"),
+                Exercise("Press militar con barra", 4, "6-10"),
+                Exercise("Elevaciones laterales con mancuernas", 4, "6-10")
             )
+
             "definicion" -> listOf(
-                Exercise("Ejercicio 15", 3, "8-12"),
-                Exercise("Ejercicio 16", 3, "8-12")
+                Exercise("Sentadillas", 4, "12-15"),
+                Exercise("Prensa de pierna", 3, "12-15"),
+                Exercise("Extensiones de pierna", 3, "12-15"),
+                Exercise("Curl de pierna", 3, "12-15"),
+                // Hombro
+                Exercise("Press militar con mancuernas", 4, "10-15"),
+                Exercise("Elevaciones laterales", 4, "10-15")
             )
+
             "tonificar" -> listOf(
-                Exercise("Ejercicio 17", 2, "12-15"),
-                Exercise("Ejercicio 18", 2, "12-15")
+                Exercise("Sentadillas con mancuernas", 3, "12-15"),
+                Exercise("Prensa de pierna", 3, "12-15"),
+                Exercise("Zancadas", 3, "12-15"),
+                Exercise("Curl femoral en máquina", 3, "12-15"),
+                Exercise("Elevaciones frontales", 4, "12-15"),
+                Exercise("Elevaciones laterales en cable", 4, "12-15")
             )
             else -> emptyList()
         }
@@ -148,16 +195,32 @@ class WorkoutDayActivity : AppCompatActivity() {
         Log.d("WorkoutDayActivity", "Obteniendo rutina de Jueves para: $objective")
         return when (objective) {
             "aumento de masa muscular" -> listOf(
-                Exercise("Ejercicio 19", 3, "6-10"),
-                Exercise("Ejercicio 20", 3, "6-10")
+                Exercise("Jalón al pecho con agarre estrecho", 4, "4-8"),
+                Exercise("Remo con barra", 4, "4-8"),
+                Exercise("Pull-up (dominadas)", 3, "4-8"),
+                Exercise("Pullover con mancuerna", 3, "4-8"),
+                Exercise("Curl con barra recta", 4, "6-12"),
+                Exercise("Curl de bíceps concentrado", 4, "6-12")
             )
+
             "definicion" -> listOf(
-                Exercise("Ejercicio 21", 3, "8-12"),
-                Exercise("Ejercicio 22", 3, "8-12")
+                Exercise("Jalón al pecho", 3, "12-15"),
+                Exercise("Remo en máquina", 3, "12-15"),
+                Exercise("Pull-up (dominadas)", 3, "12-15"),
+                Exercise("Face pull", 3, "12-15"),
+                // Bíceps
+                Exercise("Curl con mancuernas", 4, "10-15"),
+                Exercise("Curl martillo", 4, "10-15")
             )
+
             "tonificar" -> listOf(
-                Exercise("Ejercicio 23", 2, "12-15"),
-                Exercise("Ejercicio 24", 2, "12-15")
+                Exercise("Remo con mancuerna", 3, "8-12"),
+                Exercise("Jalón al pecho", 3, "8-12"),
+                Exercise("Superman", 3, "8-12"),
+                Exercise("Pull-up asistido", 3, "8-12"),
+                // Bíceps
+                Exercise("Curl con mancuerna en banco inclinado", 4, "6-12"),
+                Exercise("Curl con barra Z", 4, "6-12")
             )
             else -> emptyList()
         }
@@ -167,17 +230,32 @@ class WorkoutDayActivity : AppCompatActivity() {
         Log.d("WorkoutDayActivity", "Obteniendo rutina de Viernes para: $objective")
         return when (objective) {
             "aumento de masa muscular" -> listOf(
-                Exercise("Ejercicio 25", 3, "6-10"),
-                Exercise("Ejercicio 26", 3, "6-10")
+                Exercise("Press de banca con barra", 4, "4-8"),
+                Exercise("Press inclinado con barra", 4, "4-8"),
+                Exercise("Aperturas con mancuernas", 3, "4-8"),
+                Exercise("Press declinado con barra", 3, "4-8"),
+                Exercise("Press de tríceps en máquina", 4, "6-12"),
+                Exercise("Extensiones de tríceps con barra Z", 4, "6-12")
             )
+
             "definicion" -> listOf(
-                Exercise("Ejercicio 27", 3, "8-12"),
-                Exercise("Ejercicio 28", 3, "8-12")
+                Exercise("Press de banca con mancuernas", 3, "12-15"),
+                Exercise("Aperturas con mancuernas en banco inclinado", 3, "12-15"),
+                Exercise("Pullover con mancuerna", 3, "12-15"),
+                Exercise("Flexiones con palmas", 3, "12-15"),
+                Exercise("Extensión de tríceps con cuerda en polea", 4, "10-15"),
+                Exercise("Rompecráneos en banco plano", 4, "10-15")
             )
+
             "tonificar" -> listOf(
-                Exercise("Ejercicio 29", 2, "12-15"),
-                Exercise("Ejercicio 30", 2, "12-15")
+                Exercise("Flexiones de rodillas", 3, "8-12"),
+                Exercise("Press de pecho en máquina", 3, "8-12"),
+                Exercise("Aperturas con mancuernas en banco plano", 3, "8-12"),
+                Exercise("Press de pecho en máquina con agarre neutro", 3, "8-12"),
+                Exercise("Extensión de tríceps en polea baja", 4, "6-12"),
+                Exercise("Patada de tríceps con mancuerna", 4, "6-12")
             )
+
             else -> emptyList()
         }
     }
@@ -186,17 +264,32 @@ class WorkoutDayActivity : AppCompatActivity() {
         Log.d("WorkoutDayActivity", "Obteniendo rutina de Sábado para: $objective")
         return when (objective) {
             "aumento de masa muscular" -> listOf(
-                Exercise("Ejercicio A", 3, "6-10"),
-                Exercise("Ejercicio B", 3, "6-10")
+                Exercise("Hip thrust con barra", 4, "6-10"),
+                Exercise("Peso muerto rumano con mancuernas", 4, "6-10"),
+                Exercise("Zancadas caminando con mancuernas", 3, "6-10"),
+                Exercise("Sentadilla frontal con barra", 3, "6-10"),
+                Exercise("Press Arnold", 4, "6-10"),
+                Exercise("Face pull con cuerda", 4, "6-10")
             )
+
             "definicion" -> listOf(
-                Exercise("Ejercicio C", 3, "8-12"),
-                Exercise("Ejercicio D", 3, "8-12")
+                Exercise("Step-ups con mancuernas", 3, "12-15"),
+                Exercise("Curl femoral tumbado", 3, "12-15"),
+                Exercise("Extensiones de cadera en máquina", 3, "12-15"),
+                Exercise("Sentadillas búlgaras", 3, "12-15"),
+                Exercise("Press militar en máquina", 4, "10-15"),
+                Exercise("Pájaros con mancuernas", 4, "10-15")
             )
+
             "tonificar" -> listOf(
-                Exercise("Ejercicio E", 2, "12-15"),
-                Exercise("Ejercicio F", 2, "12-15")
+                Exercise("Elevaciones de talones de pie (gemelos)", 3, "12-15"),
+                Exercise("Zancadas laterales", 3, "12-15"),
+                Exercise("Sentadillas sumo con mancuerna", 3, "12-15"),
+                Exercise("Curl de pierna sentado", 3, "12-15"),
+                Exercise("Elevaciones en Y con mancuernas", 4, "12-15"),
+                Exercise("Press militar con banda elástica", 4, "12-15")
             )
+
             else -> emptyList()
         }
     }

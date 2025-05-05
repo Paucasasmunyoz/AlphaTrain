@@ -2,7 +2,8 @@ package com.pcmdam.alphatrain
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.TypedValue
+import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupMenu
@@ -12,13 +13,13 @@ import com.alphatrain.app.WorkoutDayActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.Arrays
+import java.lang.Exception
 
 class MainPageActivity : AppCompatActivity() {
     private var layoutDiasEntrenamiento: LinearLayout? = null
     private var auth: FirebaseAuth? = null
     private var db: FirebaseFirestore? = null
-    private var userObjective: String = "Mantener peso" // Inicializamos con un valor por defecto
+    private var userObjective: String = "Mantener peso" // Valor por defecto
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,52 +60,61 @@ class MainPageActivity : AppCompatActivity() {
                 .addOnSuccessListener { documentSnapshot: DocumentSnapshot ->
                     if (documentSnapshot.exists()) {
                         val diasSemanaString = documentSnapshot.getString("dias_semana")
-                        if (diasSemanaString != null && !diasSemanaString.isEmpty()) {
-                            val dias = Arrays.asList(
-                                *diasSemanaString.split(", ".toRegex())
-                                    .dropLastWhile { it.isEmpty() }
-                                    .toTypedArray()
-                            )
+                        if (!diasSemanaString.isNullOrEmpty()) {
+                            val dias = diasSemanaString.split(", ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
-                            val diaTextViews = arrayOf(
-                                findViewById<TextView>(R.id.dia1TextView),
-                                findViewById<TextView>(R.id.dia2TextView),
-                                findViewById<TextView>(R.id.dia3TextView),
-                                findViewById<TextView>(R.id.dia4TextView),
-                                findViewById<TextView>(R.id.dia5TextView)
-                            )
+                            // Limpiar cualquier TextView previo
+                            layoutDiasEntrenamiento?.removeAllViews()
 
+                            // Crear dinámicamente los TextViews
                             for (i in dias.indices) {
-                                if (i < diaTextViews.size) {
-                                    val dayOfWeek = dias[i].trim()
-                                    diaTextViews[i].text = dayOfWeek
-                                    diaTextViews[i].setOnClickListener {
-                                        val intent = Intent(this@MainPageActivity, WorkoutDayActivity::class.java)
-                                        intent.putExtra("day", dayOfWeek)
-                                        intent.putExtra("objective", userObjective)
-                                        startActivity(intent)
-                                    }
+                                val diaTextView = TextView(this@MainPageActivity)
+                                diaTextView.layoutParams = LinearLayout.LayoutParams(
+                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                    resources.getDimensionPixelSize(R.dimen.dia_height)
+                                )
+                                diaTextView.setBackgroundColor(resources.getColor(R.color.dia_background)) // Fondo lila
+                                diaTextView.setPadding(16, 0, 0, 0)
+                                diaTextView.text = dias[i].trim()
+                                diaTextView.setTextColor(resources.getColor(android.R.color.white))
+                                diaTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+                                diaTextView.gravity = Gravity.CENTER_VERTICAL
+                                diaTextView.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER)
+
+                                // Agregar bordes redondeados y espaciado
+                                diaTextView.setBackgroundResource(R.drawable.dia_background) // Para aplicar bordes redondeados
+
+                                // Aumentar el margen inferior para más separación entre los días
+                                val layoutParams = diaTextView.layoutParams as LinearLayout.LayoutParams
+                                layoutParams.bottomMargin = 16 // Mayor separación entre días
+                                diaTextView.layoutParams = layoutParams
+
+                                // Añadir clic para la navegación al detalle del día
+                                diaTextView.setOnClickListener {
+                                    val intent = Intent(this@MainPageActivity, WorkoutDayActivity::class.java)
+                                    intent.putExtra("day", dias[i].trim())
+                                    intent.putExtra("objective", userObjective)
+                                    startActivity(intent)
                                 }
-                            }
-                            for (i in dias.size until diaTextViews.size) {
-                                diaTextViews[i].visibility = View.GONE
+
+                                layoutDiasEntrenamiento?.addView(diaTextView)
                             }
                         } else {
-                            val mensajeTextView = TextView(this@MainPageActivity)
-                            mensajeTextView.text = "Aún no has seleccionado tus días de entrenamiento."
-                            layoutDiasEntrenamiento!!.addView(mensajeTextView)
+                            mostrarMensaje("Aún no has seleccionado tus días de entrenamiento.")
                         }
                     } else {
-                        val mensajeTextView = TextView(this@MainPageActivity)
-                        mensajeTextView.text = "Aún no has configurado tu plan de entrenamiento."
-                        layoutDiasEntrenamiento!!.addView(mensajeTextView)
+                        mostrarMensaje("Aún no has configurado tu plan de entrenamiento.")
                     }
                 }
-                .addOnFailureListener { e: Exception? ->
-                    val errorTextView = TextView(this@MainPageActivity)
-                    errorTextView.text = "Error al cargar los días de entrenamiento."
-                    layoutDiasEntrenamiento!!.addView(errorTextView)
+                .addOnFailureListener { e: Exception ->
+                    mostrarMensaje("Error al cargar los días de entrenamiento.")
                 }
         }
+    }
+
+    private fun mostrarMensaje(mensaje: String) {
+        val mensajeTextView = TextView(this@MainPageActivity)
+        mensajeTextView.text = mensaje
+        layoutDiasEntrenamiento!!.addView(mensajeTextView)
     }
 }
