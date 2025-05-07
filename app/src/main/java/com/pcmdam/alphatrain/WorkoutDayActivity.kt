@@ -32,7 +32,7 @@ class WorkoutDayActivity : AppCompatActivity() {
         val rawDay = intent.getStringExtra("day")?.trim()
         val day = normalize(rawDay)
         val workoutDayTitleTextView: TextView = findViewById(R.id.workoutDayTitle)
-        workoutDayTitleTextView.text = rawDay  // Mostrar el día en pantalla
+        workoutDayTitleTextView.text = rawDay
 
         val userId = auth.currentUser?.uid
         if (userId == null || day == null) {

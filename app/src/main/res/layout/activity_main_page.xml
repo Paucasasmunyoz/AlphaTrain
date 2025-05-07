@@ -24,10 +24,12 @@
 
         <ImageView
             android:id="@+id/intensityImageView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="235dp"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/mp" />
+            android:src="@drawable/mp"
+            android:scaleType="centerCrop" />
+
 
         <TextView
             android:id="@+id/tusDiasTextView"
@@ -39,13 +41,12 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
-        <!-- Aquí se agregan dinámicamente los días -->
         <LinearLayout
             android:id="@+id/layoutDiasEntrenamiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="16dp" /> <!-- Se aumenta el margen superior para mayor separación entre los días -->
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 

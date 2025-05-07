@@ -17,6 +17,9 @@
         android:theme="@style/Theme.AlphaTrain"
         tools:targetApi="31">
         <activity
+            android:name=".ObjectiveActivity2"
+            android:exported="false" />
+        <activity
             android:name="com.alphatrain.app.WorkoutDayActivity"
             android:exported="false" />
         <activity
@@ -45,6 +48,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
